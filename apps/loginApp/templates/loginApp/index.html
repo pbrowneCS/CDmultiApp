@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>django loginApp!</title>
+		<meta charset="utf-8">
+		<meta name="description" content="Testing django">
+	</head>
+	<body>
+		<h1>email loginApp</h1>
+		<h2>Register</h2>
+		<form action="{% url 'my_loginApp_register' %}" method = "POST">
+			{% csrf_token %}
+			<p>First Name: <input class="form-control" type="text" name="firstName"></p>
+			<p>Last Name: <input class="form-control" type="text" name="lastName"></p>
+			<p>Email: <input class="form-control" type="text" name="userEmail"></p>
+			<p>Password: <input class="form-control" type="text" name="password"></p>
+			<p>Confirm pw: <input class="form-control" type="text" name="confirm"></p>
+			<input class="btn" type="submit" value="Register">
+		</form>
+		<br>
+		<h2>Login</h2>
+		<form action="{%url 'my_loginApp_login' %}" method = "POST">
+			{% csrf_token %}
+			<p>Email: <input class="form-control" type="text" name="userEmail"></p>
+			<p>Password: <input class="form-control" type="text" name="password"></p>
+			<br>
+			<input class="btn" type="submit" value="Login">
+		</form>
+		{% if messages %}
+		<ul class="messages">
+		{% for message in messages %}
+		<li{% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+		{{User.firstname}}
+	</body>
+</html>

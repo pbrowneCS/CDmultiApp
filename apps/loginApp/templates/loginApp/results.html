@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>django loginApp!</title>
+		<meta charset="utf-8">
+		<meta name="description" content="Testing django">
+	</head>
+	<body>
+		{% if messages %}
+			<ul class="messages">
+			{% for message in messages %}
+			<li{% if message.tags %} class="{{message.tags}}"{% endif %}>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+	<p>Success! Welcome, {{user.first_name}}</p>
+	</body>
+</html>

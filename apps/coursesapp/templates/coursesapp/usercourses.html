@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        {% load staticfiles %}
+        <link rel="stylesheet" type="text/css" href="{% static 'coursesapp/css/styles.css' %}">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <title>Courses</title>
+    </head>
+    <body>
+        <form action="{% url 'my_coursesapp_usercourses' %}" method = "POST">
+            {% csrf_token %}
+            <select name="course">
+                <option disabled selected>Courses</option>
+                {% for course in courses %}
+                    <option value="{{course.id}}">{{ course.course_name }}</option>
+                {% endfor %}
+            </select>
+            <select name="user">
+            <option disabled selected>User</option>
+            {% for user in users %}
+                <option value="{{user.id}}">{{ user.first_name }} {{ user.last_name }}</option>
+            {% endfor %}
+            </select>
+            <input class="btn" type="submit" value="Add User">
+        </form>
+        <div class = "table">
+            <table id="users_courses">
+                <tr>
+                    <th>Course Title</th>
+                    <th>Number of Users</th>
+                </tr>
+                <td>
+                    {% for course in courses %}
+                    <p>{{ course.course_name }}</p>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for course in count %}
+                        <p>{{course.num_users}}</p>
+                    {% endfor %}
+                </td>
+            </table>
+        <div>
+    </body>
+</html>
+<!-- {% for course in courses %}
+                <tr>
+                    <td>{{ course.course_name }}</td>
+                    <td>{{ course.description }}</td>
+                    <td>{{ course.created_at }}</td>
+                    <td><form action="{% url 'my_coursesapp_removecourse' course.id %}">{% csrf_token %}<input class="btn btn-default" type="submit" value="Remove"></form></td>
+                </tr>
+                {% endfor %} -->
